@@ -5,6 +5,11 @@ class Symbolization {
 
   public convertion() {
     this.originalFile = fs.readFileSync('./test.js', 'utf-8')
+    this.outputFile(this.toSymbol('a'))
+  }
+
+  private outputFile(text: string): void {
+    fs.writeFileSync("result.js", text);
   }
 
   private toSymbol(char:string):string {
