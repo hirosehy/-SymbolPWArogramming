@@ -7,6 +7,26 @@ class Symbolization {
     this.originalFile = fs.readFileSync('./test.js', 'utf-8')
   }
 
+  private toSymbol(char:string):string {
+    if (char.length > 1) throw new Error('Only one character can be used for the argument.')
+    const code: string = this.zeroPadding(4, char.charCodeAt(0).toString(16))
+    
+    const symbol = '[]' +
+    '[([]+{})[-~-~-~-~-~[]]+([]+{})[-~[]]+([][[]]+[])[-~[]]+(![]+[])[-~-~-~[]]+(!![]+[])[+[]]+(!![]+[])[-~[]]+([][[]]+[])[+[]]+([]+{})[-~-~-~-~-~[]]+(!![]+[])[+[]]+([]+{})[-~[]]+(!![]+[])[-~[]]]'+ // [constructor]
+    '[([]+{})[-~-~-~-~-~[]]+([]+{})[-~[]]+([][[]]+[])[-~[]]+(![]+[])[-~-~-~[]]+(!![]+[])[+[]]+(!![]+[])[-~[]]+([][[]]+[])[+[]]+([]+{})[-~-~-~-~-~[]]+(!![]+[])[+[]]+([]+{})[-~[]]+(!![]+[])[-~[]]]'+ // [constructor]
+    '(' +
+    '(!![]+[])[-~[]]+(!![]+[])[-~-~-~[]]+(!![]+[])[+[]]+([][[]]+[])[+[]]+(!![]+[])[-~[]]+([][[]]+[])[-~[]]+(/ /+[])[-~[]]+' + // return 
+    '(/"/+[])[-~[]]+ (/\\/+[])[-~[]]+([][[]]+[])[+[]]+' + // \"\\u
+    code.split("").map( n => {
+      return this.numberToSymbol(Number(n))
+    }).join('') +
+    '(/"/+[])[-~[]]' + // \"
+    ')' +
+    '()'
+
+    return symbol
+  }
+
   private zeroPadding(digits: number, number: string): string {
     if (digits < number.length) throw new Error('The given number is greater than the specified number of digits')
     return ('0'.repeat(digits) + number).slice(-digits)
