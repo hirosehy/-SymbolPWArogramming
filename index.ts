@@ -34,7 +34,7 @@ class Symbolization {
 
   private numberToSymbol(number: number): string {
     if (number === 0) {
-      return '+[]'
+      return '-[]'
     } else if (number < 10 && number > 0) {
       return '-~'.repeat(number) + '[]'
     } else {
