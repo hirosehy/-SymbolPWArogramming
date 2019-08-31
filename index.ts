@@ -15,9 +15,9 @@ class Symbolization {
 
   constructor() {
     if (
-      program.output === 'index.js' &&
-      program.output === './index.js' &&
-      program.output === 'index.ts' &&
+      program.output === 'index.js' ||
+      program.output === './index.js' ||
+      program.output === 'index.ts' ||
       program.output === 'index.ts'
     ) {
       throw new Error('Output path name cannot be used.')
