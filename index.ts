@@ -1,11 +1,39 @@
 import * as fs from 'fs'
 
+const program = require('commander')
+
+program
+  .version('0.0.1', '-v, --version')
+  .option('-c, --convetion <n>', 'Convertion file path')
+  .option('-o, --output <n>', 'Converted file output path')
+  .parse(process.argv)
+
 class Symbolization {
   private originalFile: string = ''
   private convertedFile: string = ''
 
+
+  constructor() {
+    if (
+      program.convertion === 'index.js' &&
+      program.convertion === './index.js' &&
+      program.convertion === 'index.ts' &&
+      program.convertion === 'index.ts'
+    ) {
+      throw new Error('This file cannot be converted.')
+    }
+    if (
+      program.output === 'index.js' &&
+      program.output === './index.js' &&
+      program.output === 'index.ts' &&
+      program.output === 'index.ts'
+    ) {
+      throw new Error('Output path name cannot be used.')
+    }
+  }
+
   public convertion() {
-    this.originalFile = fs.readFileSync('./test.js', 'utf-8')
+    this.originalFile = fs.readFileSync(program.convetion, 'utf-8')
     this.convertedFile = this.originalFile.split('').map((s, index) => {
       if (index === this.originalFile.length - 1) {
         return this.toSymbol(s)
@@ -20,7 +48,7 @@ class Symbolization {
   }
 
   private outputFile(text: string): void {
-    fs.writeFileSync("result.js", text);
+    fs.writeFileSync(program.output, text);
   }
 
   private toSymbol(char:string):string {
