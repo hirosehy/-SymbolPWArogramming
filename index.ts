@@ -20,7 +20,7 @@ class Symbolization {
       program.output === 'index.ts' ||
       program.output === 'index.ts'
     ) {
-      throw new Error('Output path name cannot be used.')
+      throw new Error(`${program.output} is is a name that cannot be used as an output path.`)
     }
   }
 
