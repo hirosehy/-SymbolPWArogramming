@@ -15,14 +15,6 @@ class Symbolization {
 
   constructor() {
     if (
-      program.convertion === 'index.js' &&
-      program.convertion === './index.js' &&
-      program.convertion === 'index.ts' &&
-      program.convertion === 'index.ts'
-    ) {
-      throw new Error('This file cannot be converted.')
-    }
-    if (
       program.output === 'index.js' &&
       program.output === './index.js' &&
       program.output === 'index.ts' &&
