@@ -1,5 +1,6 @@
 # JavaScript記号変換
 [JS記号プログラミング入門](https://qiita.com/acid_chicken/items/eeb0b42a1ecbba0c49e3)に感銘を受けたので作成
+指定したJSファイルを、全て記号へと変換します。
 
 ## 使い方
 
